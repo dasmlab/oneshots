@@ -7,7 +7,7 @@ This script automates the setup of a **K3s cluster** with **MetalLB** configured
 ## 🖼️ Deployment Overview
 
 <p align="center">
-  <img src="assets/k3s_metallb_simple_layout.svg" alt="K3s + MetalLB Deployment Overview" width="600">
+  <img src="assets/k3s_metallb_simple_layout.png" alt="K3s + MetalLB Deployment Overview" width="600">
 </p>
 
 ---
