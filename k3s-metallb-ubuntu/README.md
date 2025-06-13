@@ -37,3 +37,8 @@ This script automates the setup of a **K3s cluster** with **MetalLB** configured
 chmod +x oneshot_k3s_metallb_bgp.sh
 sudo ./oneshot_k3s_metallb_bgp.sh
 
+To Remove:
+
+```bash
+chmod +x oneshot_delete_k3s_metallb_bgp.sh
+sudo ./oneshot_delete_k3s_metallb_bgp.sh
