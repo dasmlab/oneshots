@@ -11,6 +11,7 @@ This script automates the setup of a **K3s cluster** with **MetalLB** configured
   - `ens32` (Main NIC): `10.10.1.120/16`
   - `ens36` (BGP NIC): `192.168.19.10/24`
 - A reachable BGP peer at `192.168.19.1` (ASN `65999`)
+- - Change the values in the script to match your layout
 - Outbound internet access for pulling K3s and MetalLB components
 - Root or sudo privileges
 
