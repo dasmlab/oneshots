@@ -6,7 +6,8 @@ This script automates the setup of a **K3s cluster** with **MetalLB** configured
 
 ## Deployment Overview
 
-![K3s + MetalLB Deployment Overview](assets/k3s_metallb_simple_layout.png)
+
+<img src="https://raw.githubusercontent.com/lmcdasm/oneshots/main/k3s-metallb-ubuntu/assets/k3s_metalb_simple_layout.png" alt="Deployment Overview" width="800">
 
 
 ---
