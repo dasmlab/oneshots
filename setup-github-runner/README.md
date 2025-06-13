@@ -1,40 +1,22 @@
-# OneShot GitHub Runner
+# OneShot GitHub Runner (Containerized)
 
-This project provides a **one-shot script** to stand up a GitHub Actions self-hosted runner in minutes.
+This repo lets you spin up a **GitHub Actions Runner in a container** using GitHub’s one-time registration token.
 
-## What It Does
+##  Prerequisites
 
-This script:
-- Downloads the latest GitHub runner binary
-- Registers the runner with your repo
-- Starts it immediately
+- Docker installed
+- GitHub repo with self-hosted runner enabled
+- GitHub-generated one-time **runner token**
 
-Perfect for:
-- Dynamic build runners
-- Dev/test runners behind firewalls
-- Private CI environments
+##  Usage
 
-## Prerequisites
+1. Go to:
+https://github.com/<org>/<repo>/settings/actions/runners/new
 
-1. Ubuntu-based Linux machine (tested on 20.04+)
-2. Internet access to `github.com`
-3. GitHub Personal Access Token (PAT) with `repo` or `admin:org` scope
+- Choose Linux + x64
+- Copy the **registration token** and repo URL
 
-## GitHub PAT
-
-Your PAT should be scoped as follows:
-
-| Context     | Scope Required         |
-|-------------|------------------------|
-| User repo   | `repo`                 |
-| Org repo    | `admin:org`, `repo`    |
-
-## Setup
-
-Edit the `setup-github-runner.sh` script to define:
+2. Run the script:
 
 ```bash
-GITHUB_OWNER="your-org-or-user"
-GITHUB_REPO="your-repo-name"
-GITHUB_PAT="your-token-here"
-
+./run-runner.sh https://github.com/YOURORG/YOURREPO YOUR_TOKEN_HERE
