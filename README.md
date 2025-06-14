@@ -7,6 +7,12 @@ The folders in this repo contain simple one-shots (bash scripts mostly and instr
 
 ## List of One Shots
 
-- setup-github-runner  - This sets up a simple docker container to run a github.com runner on  your local machine. Includes HAproxy configuration for Hosting setup on an Exposed HAProxy instance.
+- **setup-github-runner**  - This sets up a simple docker container to run a github.com runner on  your local machine. This builds with the .NET deps, and in DockerInDocker mode
+
+- **k3s-metallb-ubuntu** - This deployes a k3s (Rancher) cluster on a Ubuntu OS in BGP mode (with MetalLB CNI).
+
+- **install-helm** - Simple latest helm install script 
+
+- **install-terraform** - Simple latest Terraform install script
 
 

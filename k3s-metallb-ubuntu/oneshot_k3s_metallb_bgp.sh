@@ -4,6 +4,7 @@ set -euo pipefail
 
 # CONFIG
 K3S_VERSION="v1.29.4+k3s1"
+KUBECONFIG="/etc/rancher/k3s/k3s.yaml"
 METALLB_VERSION="v0.14.5"
 ASN_LOCAL="65001"
 ASN_PEER="65999"
@@ -25,10 +26,8 @@ sleep 10
 kubectl wait --for=condition=Ready node --all --timeout=90s
 
 echo "[*] Installing MetalLB ${METALLB_VERSION} CRDs..."
-kubectl apply -f https://raw.githubusercontent.com/metallb/metallb/${METALLB_VERSION}/config/manifests/metallb-crds.yaml
+kubectl apply -f https://raw.githubusercontent.com/metallb/metallb/v0.14.5/config/manifests/metallb-native.yaml
 
-echo "[*] Deploying MetalLB components..."
-kubectl apply -f https://raw.githubusercontent.com/metallb/metallb/${METALLB_VERSION}/config/manifests/metallb.yaml
 
 echo "[*] Waiting for MetalLB controller to be ready..."
 kubectl wait --namespace metallb-system --for=condition=Available deployment/controller --timeout=120s
