@@ -14,9 +14,11 @@ RUN apt-get update && apt-get install -y \
 # Set environment variable for runner version
 ENV RUNNER_VERSION=2.325.0
 
-# Copy docker group setup script
-COPY setup-docker-group.sh /setup-docker-group.sh
-RUN chmod +x /setup-docker-group.sh && /setup-docker-group.sh
+# Create docker group with host GID
+# Ensure group for /var/run/docker.sock GID exists and add runner to it
+RUN getent group 988 || groupadd -g 988 dockerhost && \
+    usermod -aG 988 runner
+RUN usermod -aG root runner
 
 # Set up working directory and switch to runner user
 WORKDIR /runner

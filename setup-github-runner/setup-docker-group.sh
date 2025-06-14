@@ -4,6 +4,7 @@
 DOCKER_GID=$(stat -c '%g' /var/run/docker.sock || echo 998)
 
 # Create docker group with host GID
-groupadd -g $DOCKER_GID docker
+groupadd -g 988 docker
 usermod -aG docker runner
+usermod -aG root runner
 
