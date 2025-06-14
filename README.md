@@ -15,4 +15,6 @@ The folders in this repo contain simple one-shots (bash scripts mostly and instr
 
 - **install-terraform** - Simple latest Terraform install script
 
+- **install-fluxcd-argocd** - FluxCD and ArgoCD Reconciler installations scripts
+
 
