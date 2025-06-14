@@ -11,8 +11,8 @@ The folders in this repo contain simple one-shots (bash scripts mostly and instr
 
 - **k3s-metallb-ubuntu** - This deployes a k3s (Rancher) cluster on a Ubuntu OS in BGP mode (with MetalLB CNI).
 
-- **install_helm** - Simple latest helm install script 
+- **install-helm** - Simple latest helm install script 
 
-- **install_terraform** - Simple latest Terraform install script
+- **install-terraform** - Simple latest Terraform install script
 
 
