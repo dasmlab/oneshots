@@ -1,24 +1,19 @@
 FROM ubuntu:22.04
 
-RUN apt-get update && \
-    apt-get install -y \
-    curl \
-    jq \
-    tar \
-    sudo \
-    libicu-dev \
-    libssl-dev \
-    libkrb5-3 \
-    zlib1g \
-    libcurl4 \
-    libgssapi-krb5-2 \
-    ca-certificates && \
-    useradd -m runner && \
+RUN apt-get update && apt-get install -y \
+    curl jq tar sudo bash \
+    libicu-dev libssl-dev libkrb5-3 zlib1g \
+    libcurl4 libgssapi-krb5-2 ca-certificates \
+    gnupg lsb-release software-properties-common \
+    && useradd -m runner && \
     mkdir -p /runner && \
     chown runner:runner /runner
 
-WORKDIR /runner
+# Install Docker CLI (optional: use official Docker instructions)
+RUN curl -fsSL https://get.docker.com | sh
+
 USER runner
+WORKDIR /runner
 
 ENV RUNNER_VERSION=2.325.0
 
