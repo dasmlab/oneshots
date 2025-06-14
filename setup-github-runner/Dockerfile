@@ -1,22 +1,28 @@
 FROM ubuntu:22.04
 
+# Install system packages including Docker CLI dependencies
 RUN apt-get update && apt-get install -y \
     curl jq tar sudo bash \
     libicu-dev libssl-dev libkrb5-3 zlib1g \
     libcurl4 libgssapi-krb5-2 ca-certificates \
     gnupg lsb-release software-properties-common \
-    && useradd -m runner && \
-    mkdir -p /runner && \
-    chown runner:runner /runner
+    && curl -fsSL https://get.docker.com | sh \
+    && useradd -m runner \
+    && mkdir -p /runner \
+    && chown runner:runner /runner
 
-# Install Docker CLI (optional: use official Docker instructions)
-RUN curl -fsSL https://get.docker.com | sh
-
-USER runner
-WORKDIR /runner
-
+# Set environment variable for runner version
 ENV RUNNER_VERSION=2.325.0
 
+# Copy docker group setup script
+COPY setup-docker-group.sh /setup-docker-group.sh
+RUN chmod +x /setup-docker-group.sh && /setup-docker-group.sh
+
+# Set up working directory and switch to runner user
+WORKDIR /runner
+USER runner
+
+# Download GitHub Actions runner
 RUN curl -L -o actions-runner.tar.gz https://github.com/actions/runner/releases/download/v${RUNNER_VERSION}/actions-runner-linux-x64-${RUNNER_VERSION}.tar.gz && \
     tar xzf actions-runner.tar.gz && rm actions-runner.tar.gz
 

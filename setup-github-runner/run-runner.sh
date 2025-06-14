@@ -1,5 +1,5 @@
 #!/bin/bash
-# Setup the github runner, note: this is modifed for a Docker In Docker style setup (check the dockerfile)
+# Setup the GitHub runner with dynamic Docker socket group support
 
 REPO_URL="$1"
 RUNNER_TOKEN="$2"
@@ -9,10 +9,13 @@ if [[ -z "$REPO_URL" || -z "$RUNNER_TOKEN" ]]; then
   exit 1
 fi
 
-docker build -t oneshot-runner .
+DOCKER_GID=$(stat -c '%g' /var/run/docker.sock)
 
-docker stop github-runner
-docker rm github-runner
+# Build with GID injected as a build arg
+docker build --build-arg DOCKER_GID=$DOCKER_GID -t oneshot-runner .
+
+docker stop github-runner 2>/dev/null || true
+docker rm github-runner 2>/dev/null || true
 
 docker run -d \
   --privileged \
