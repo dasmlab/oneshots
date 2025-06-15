@@ -1,4 +1,4 @@
-# OneShot K3s + MetalLB (BGP Mode) Setup
+# OneShot K3s + Calico + MetalLB (BGP Mode) Setup
 
 This script automates the setup of a **K3s cluster** with **MetalLB** configured for **BGP mode** on **Ubuntu 24.04**.
 

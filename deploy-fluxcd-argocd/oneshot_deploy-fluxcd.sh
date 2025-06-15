@@ -11,6 +11,8 @@ if [ -z "$REPO_NAME" ] || [ -z "$REPO_URL" ] || [ -z "$REPO_PATH" ]; then
   exit 1
 fi
 
+MANIFEST_NAME="${REPO_NAME}-${NAMESPACE}"
+
 echo "🔍 Verifying kube context..."
 kubectl get nodes > /dev/null || { echo "❌ Cannot access Kubernetes cluster."; exit 1; }
 
@@ -26,21 +28,22 @@ if ! kubectl get pods -n "$NAMESPACE" 2>/dev/null | grep -q flux; then
 fi
 
 echo "📝 Generating Flux manifest for GitRepository + Kustomization"
-cat <<EOF > /tmp/flux-${REPO_NAME}.yaml
+cat <<EOF > /tmp/flux-${MANIFEST_NAME}.yaml
 apiVersion: source.toolkit.fluxcd.io/v1
 kind: GitRepository
 metadata:
-  name: ${REPO_NAME}
+  name: ${MANIFEST_NAME}
   namespace: ${NAMESPACE}
 spec:
   interval: 30s
   url: ${REPO_URL}
-  branch: main
+  ref:
+    branch: main
 ---
 apiVersion: kustomize.toolkit.fluxcd.io/v1
 kind: Kustomization
 metadata:
-  name: ${REPO_NAME}
+  name: ${MANIFEST_NAME}
   namespace: ${NAMESPACE}
 spec:
   interval: 1m0s
@@ -48,22 +51,22 @@ spec:
   prune: true
   sourceRef:
     kind: GitRepository
-    name: ${REPO_NAME}
+    name: ${MANIFEST_NAME}
   targetNamespace: default
 EOF
 
 echo "----------------------------------------"
-cat /tmp/flux-${REPO_NAME}.yaml
+cat /tmp/flux-${MANIFEST_NAME}.yaml
 echo "----------------------------------------"
 
 read -p 'Apply this manifest? (yes/no): ' CONFIRM
 if [[ "$CONFIRM" == "yes" ]]; then
   echo "🚀 Applying manifest..."
-  kubectl apply -f /tmp/flux-${REPO_NAME}.yaml
+  kubectl apply -f /tmp/flux-${MANIFEST_NAME}.yaml
   echo "✅ Done."
 else
   echo "❌ Aborted."
 fi
 
-rm -f /tmp/flux-${REPO_NAME}.yaml
+rm -f /tmp/flux-${MANIFEST_NAME}.yaml
 

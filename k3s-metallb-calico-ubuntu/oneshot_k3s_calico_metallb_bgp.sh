@@ -6,6 +6,7 @@ set -euo pipefail
 K3S_VERSION="v1.29.4+k3s1"
 KUBECONFIG="/etc/rancher/k3s/k3s.yaml"
 METALLB_VERSION="v0.14.5"
+CALICO_VERSION="v3.27.0"
 ASN_LOCAL="65001"
 ASN_PEER="65999"
 PEER_IP="192.168.19.1"
@@ -24,6 +25,10 @@ export KUBECONFIG=/etc/rancher/k3s/k3s.yaml
 echo "[*] Waiting for K3s to be ready..."
 sleep 10
 kubectl wait --for=condition=Ready node --all --timeout=90s
+
+echo "[*] Installing Calico ${CALICO_VERSION}  CRDs"
+curl https://raw.githubusercontent.com/projectcalico/calico/v3.27.0/manifests/calico.yaml -O
+kubectl apply -f calico.yaml
 
 echo "[*] Installing MetalLB ${METALLB_VERSION} CRDs..."
 kubectl apply -f https://raw.githubusercontent.com/metallb/metallb/v0.14.5/config/manifests/metallb-native.yaml
