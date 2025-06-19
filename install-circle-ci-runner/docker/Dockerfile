@@ -21,5 +21,5 @@ RUN sudo apt-get update
 RUN sudo apt-get install docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin -y
 
 # Set the circleci container user to the group
-RUN sudo usermod -aG docker circleci
+RUN sudo groupdd -g 999 docker && sudo usermod -aG docker circleci
 
