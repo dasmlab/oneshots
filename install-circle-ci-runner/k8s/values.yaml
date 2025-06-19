@@ -1,0 +1,9 @@
+agent:
+  resourceClasses:
+    dasmlab/Default:
+      token: PUT_TOKEN_HERE 
+  containerSecurityContext:
+    privileged: true
+    allowPrivilegeEscalation: true
+    capabilities:
+      add: ["SYS_ADMIN", "MKNOD", "SETFCAP", "SYS_CHROOT"]
