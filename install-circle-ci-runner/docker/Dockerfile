@@ -4,8 +4,8 @@ RUN sudo apt-get update; \
      docker
 
 # Add Docker's official GPG key:
-RUN sudo apt-get update
-RUN sudo apt-get install ca-certificates curl
+RUN sudo apt-get update -y
+RUN sudo apt-get install ca-certificates curl -y
 RUN sudo install -m 0755 -d /etc/apt/keyrings
 RUN sudo curl -fsSL https://download.docker.com/linux/ubuntu/gpg -o /etc/apt/keyrings/docker.asc
 RUN sudo chmod a+r /etc/apt/keyrings/docker.asc
@@ -18,8 +18,8 @@ RUN echo \
 RUN sudo apt-get update
 
 # Install Latest Docker 
-RUN sudo apt-get install docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
+RUN sudo apt-get install docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin -y
 
 # Set the circleci container user to the group
-RUN usermod -aG docker circleci
+RUN sudo usermod -aG docker circleci
 
