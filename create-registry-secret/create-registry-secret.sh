@@ -7,5 +7,5 @@ kubectl create secret docker-registry dasmlab-ghcr-pull \
   --docker-username=dasmlab \
   --docker-password=${GHCR_PAT} \
   --docker-email=dasmlab-bot@dasmlab.org \
-  -n whatsnew-service-system
+  -n design-carousel-service-system
 
