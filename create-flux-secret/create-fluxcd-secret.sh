@@ -2,7 +2,7 @@
 
 GHCR_PAT=${DASMLAB_GHCR_PAT}
 USERNAME="git"
-TAR_NS="whatsnew-service-system"
+TAR_NS="design-carousel-service-system"
 echo "PAT (BAD):   $GHCR_PAT"
 echo "USERNAME :  $USERNAME"
 echo "NS : $TAR_NS"
