@@ -15,6 +15,18 @@ The folders in this repo contain simple one-shots (bash scripts mostly and instr
 
 - **install-terraform** - Simple latest Terraform install script
 
-- **install-fluxcd-argocd** - FluxCD and ArgoCD Reconciler installations scripts
+- **deploy-fluxcd-argocd** - FluxCD and ArgoCD Reconciler installations scripts
+
+- **create-flux-secret** - Create a FluxCD secret for use on a Cluster 
+
+- **create-registry-secret** -  Create a Dockerconfig.json Registry Secret
+
+- **deploy-keycloak-k8s** - Setup an instance of **Keyclock** on  your K8s Cluster
+
+- **install-aws-cli** - Install AWS CLI and Assumes STS Role setup script
+
+- **install-circle-ci-runner** - Install K8s or Docker-In-Docker **CircleCI** Runner
+
+- **output-bearer-jwt** - A simple script to fetch out your JWT Bearer token
 
 
